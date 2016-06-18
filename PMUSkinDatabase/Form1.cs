@@ -67,6 +67,7 @@ namespace PMUSkinDatabase
             {
                 MessageBox.Show("This application needs an internet connection. Check your internet connection.", 
                     "No Internet Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
 
             if (listBox1.GetSelected(0) == true)
