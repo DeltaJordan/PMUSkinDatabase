@@ -271,9 +271,24 @@ namespace PMUSkinDatabase
         {
             MessageBox.Show("Download completed. Skin will now be applied.",
                     "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            ZipFile.ExtractToDirectory(Path.Combine(skindirectory, "Downloads\\tempskin.zip"), skindirectory);
+            try
+            {
+                ZipFile.ExtractToDirectory(Path.Combine(skindirectory, "Downloads\\tempskin.zip"), skindirectory);
+            }
+            catch (System.IO.IOException)
+            {
+                MessageBox.Show("This skin is already installed! Please select a different one, or if the skin dosen't work, try deleting it first from the Skins folder then reinstall it.",
+                    "Skin already installed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                File.Delete(Path.Combine(skindirectory, "Downloads\\tempskin.zip"));
+                File.Delete(Path.Combine(skindirectory, "Downloads"));
+                Application.Exit();
+            }
             File.Delete(Path.Combine(skindirectory, "Downloads\\tempskin.zip"));
+            File.Delete(Path.Combine(skindirectory, "Downloads"));
+            if (listBox1.GetSelected(7) == true)
+            {
+                File.Delete(Path.Combine(skindirectory, "_MACOSX"));
+            }
 
             MessageBox.Show("Skin has been applied! Go into game, click skins, then click the words Main Theme, and choose the new one!",
                     "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
