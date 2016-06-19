@@ -73,78 +73,78 @@ namespace PMUSkinDatabase
             if (listBox1.GetSelected(0) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/91D688473A5A4A5QQWE2025091EWQS/2lcr4og.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\0.jpg"));
             }
 
             if (listBox1.GetSelected(1) == true){
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/9B9E06DA3A5A4A5QQWE2025092EWQS/azurill.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\1.png"));
             }
 
             if (listBox1.GetSelected(2) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/A413ECB33A5A4A5QQWE2025099EWQS/Buizelskin2.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\2.png"));
             }
 
             if (listBox1.GetSelected(3) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://178.33.61.6/putstorage/DownloadFileHash/A4A64A5C3A5A4A5QQWE3371594EWQS/cheribi.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\3.jpg"));
             }
 
             if (listBox1.GetSelected(4) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/391C726B3A5A4A5QQWE2025144EWQS/chimeco.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\4.jpg"));
             }
 
             if (listBox1.GetSelected(5) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/C9CFAB9B3A5A4A5QQWE2025109EWQS/Flareonthememainmenu.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\5.png"));
             }
 
             if (listBox1.GetSelected(6) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/A66B1CE73A5A4A5QQWE2025118EWQS/Ariel.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\6.jpg"));
             }
 
             if (listBox1.GetSelected(7) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://178.33.61.6/putstorage/DownloadFileHash/F80BBDB03A5A4A5QQWE3371586EWQS/Legends.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\7.jpg"));
             }
 
             if (listBox1.GetSelected(8) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/551E37E43A5A4A5QQWE2025137EWQS/Raichu.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\8.jpg"));
             }
 
             if (listBox1.GetSelected(9) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/8FE876173A5A4A5QQWE2025138EWQS/6095497493_dc292804a1_b.jpg");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\9.jpg"));
             }
 
             if (listBox1.GetSelected(10) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/755CE3F83A5A4A5QQWE2025102EWQS/vulpix.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\10.png"));
             }
 
             if (listBox1.GetSelected(11) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/738BEC983A5A4A5QQWE2025198EWQS/Sekia.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\11.png"));
             }
 
             if (listBox1.GetSelected(12) == true)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load("http://srv70.putdrive.com/putstorage/DownloadFileHash/D0A544BA3A5A4A5QQWE2025197EWQS/minunplusapreview1.png");
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\12.png"));
             }
 
         }
@@ -280,11 +280,11 @@ namespace PMUSkinDatabase
                 MessageBox.Show("This skin is already installed! Please select a different one, or if the skin dosen't work, try deleting it first from the Skins folder then reinstall it.",
                     "Skin already installed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 File.Delete(Path.Combine(skindirectory, "Downloads\\tempskin.zip"));
-                File.Delete(Path.Combine(skindirectory, "Downloads"));
+                Directory.Delete(Path.Combine(skindirectory, "Downloads"));
                 Application.Exit();
             }
             File.Delete(Path.Combine(skindirectory, "Downloads\\tempskin.zip"));
-            File.Delete(Path.Combine(skindirectory, "Downloads"));
+            Directory.Delete(Path.Combine(skindirectory, "Downloads"));
             if (listBox1.GetSelected(7) == true)
             {
                 File.Delete(Path.Combine(skindirectory, "_MACOSX"));
