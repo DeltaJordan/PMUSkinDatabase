@@ -7,6 +7,7 @@ using NetFwTypeLib;
 using System.Diagnostics;
 using System.Xml;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PMUSkinDatabase
 {
@@ -70,7 +71,121 @@ namespace PMUSkinDatabase
         public static bool isDebugEnabled = false;
 
         string tempFolder = (Path.Combine(Application.StartupPath, "temp"));
-        private string skinUrl;
+
+        //An easier way to add downloads to the database
+        private string[] skinUrl = new string[] 
+        {
+            "http://b2.ge.tt/gett/7gvJpZb2/Ampharos+Theme.zip?index=11&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Azurill.pmuskn.zip?index=10&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Buizel+Theme.zip?index=9&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Cherubi+_+Cherrim.pmuskn.zip?index=8&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Chimeco.zip?index=14&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Flareon+Theme.zip?index=6&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Aerial+Avians+Skin+%281%29.zip?index=12&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b1.ge.tt/gett/7gvJpZb2/Legendary+Skin+PMU.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Raichu+skin.pmuskn.zip?index=3&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Umbreon+skin.pmuskn.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Vulpix.zip?index=13&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Seika+with+Music.zip?index=15&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/7gvJpZb2/Minun+_+Plusle.pmuskn.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/BoneBrothersTheme.zip?index=11&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/79YF6sb2/PMU+Chandelure+Family.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8mdv4sb2/Chinchou+Skin.zip?index=6&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/PMU+Eeveelution+skin.zip?index=2&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/FennekinSkin.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/PMU+gardevoir+skin.zip?index=3&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5P6s7sb2/PMU+ho-oh.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/Jirachi+Skin.zip?index=10&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/Pikachu+%2B+Family+Theme+v1+by+Whitewing.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8mdv4sb2/Salamence+Skin.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8mdv4sb2/Snivy+Skin.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/Snivy+%2B+Family+Theme+v1+by+Whitewing.zip?index=9&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8mdv4sb2/Space+%26+Time.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/PMU+Tyranitar+Fam.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/5rED3sb2/Zangtyph+skin.zip?index=7&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8mdv4sb2/Tyranitar+Skin.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/2PUo9sb2/Hatsune%2BMiku%2BTheme.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Bladed+Beasts.zip?index=23&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/yveltal+skin.zip?index=21&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/xerneas+skin.zip?index=22&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Whimsicott+Skin.zip?index=19&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Torterra.zip?index=20&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Shaymin+Skin+V3+Alternate+Title+Music.zip?index=16&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Seviper+Skin.zip?index=17&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Reshiram+skin.zip?index=18&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Pok%C3%A9mon+Mystery+Dungeon+Theme.zip?index=13&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Pikachu+Shiny+Pikachu.zip?index=14&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Pachi+Theme.zip?index=15&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/LuxraySkin.zip?index=11&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Lugia+Skin.zip?index=10&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Lucario+Skin.zip?index=8&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Lady+Rainicorn+Skin.zip?index=12&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Jirachi+Skin.zip?index=9&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Glorious+Grass+Skin.zip?index=6&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/FurorOfTheFishesSkin.zip?index=7&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Empoleon+Skin.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Emolga+Skin.zip?index=3&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Eeveelutions+Skin.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Drahsids+Theme.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Charmander+Theme.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Bulbasaur.zip?index=2&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Sheepy+Skin.pmuskn.zip?index=24&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download="
+
+        };
         private string skinDirectory = "\\Program Files\\Pokemon Mystery Universe\\Client\\Client\\Skins";
         private string skinFilename;
 
@@ -126,186 +241,16 @@ namespace PMUSkinDatabase
                     "No Internet Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
-            if (listBox1.GetSelected(0) == true)
+            
+            //Wow shortened 100+ lines of code to 8! >.<
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            try {
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\" + listBox1.SelectedIndex + ".png"));
+            }
+            catch(FileNotFoundException)
             {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\0.jpg"));
+                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\" + listBox1.SelectedIndex + ".jpg"));
             }
-
-            if (listBox1.GetSelected(1) == true){
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\1.png"));
-            }
-
-            if (listBox1.GetSelected(2) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\2.png"));
-            }
-
-            if (listBox1.GetSelected(3) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\3.jpg"));
-            }
-
-            if (listBox1.GetSelected(4) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\4.jpg"));
-            }
-
-            if (listBox1.GetSelected(5) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\5.png"));
-            }
-
-            if (listBox1.GetSelected(6) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\6.jpg"));
-            }
-
-            if (listBox1.GetSelected(7) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\7.jpg"));
-            }
-
-            if (listBox1.GetSelected(8) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\8.jpg"));
-            }
-
-            if (listBox1.GetSelected(9) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\9.jpg"));
-            }
-
-            if (listBox1.GetSelected(10) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\10.png"));
-            }
-
-            if (listBox1.GetSelected(11) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\11.png"));
-            }
-
-            if (listBox1.GetSelected(12) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\12.png"));
-            }
-
-            if (listBox1.GetSelected(13) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\13.png"));
-            }
-
-            if (listBox1.GetSelected(14) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\14.png"));
-            }
-
-            if (listBox1.GetSelected(15) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\15.png"));
-            }
-
-            if (listBox1.GetSelected(16) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\16.png"));
-            }
-
-            if (listBox1.GetSelected(17) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\17.png"));
-            }
-
-            if (listBox1.GetSelected(18) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\18.png"));
-            }
-
-            if (listBox1.GetSelected(19) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\19.png"));
-            }
-
-            if (listBox1.GetSelected(20) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\20.jpg"));
-            }
-
-            if (listBox1.GetSelected(21) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\21.png"));
-            }
-
-            if (listBox1.GetSelected(22) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\22.png"));
-            }
-
-            if (listBox1.GetSelected(23) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\23.png"));
-            }
-
-            if (listBox1.GetSelected(24) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\24.png"));
-            }
-
-            if (listBox1.GetSelected(25) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\25.jpg"));
-            }
-
-            if (listBox1.GetSelected(26) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\26.png"));
-            }
-
-            if (listBox1.GetSelected(27) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\27.png"));
-            }
-
-            if (listBox1.GetSelected(28) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\28.png"));
-            }
-
-            if (listBox1.GetSelected(29) == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Load(Path.Combine(Application.StartupPath, "Resources\\29.png"));
-            }
-
 
         }
 
@@ -346,189 +291,7 @@ namespace PMUSkinDatabase
 
             button1.Visible = false;
 
-            if (listBox1.GetSelected(0) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Ampharos+Theme.zip?index=11&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(1) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Azurill.pmuskn.zip?index=10&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(2) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Buizel+Theme.zip?index=9&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(3) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Cherubi+_+Cherrim.pmuskn.zip?index=8&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(4) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Chimeco.zip?index=14&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(5) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Flareon+Theme.zip?index=6&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(6) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Aerial+Avians+Skin+%281%29.zip?index=12&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(7) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Legendary+Skin+PMU.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(8) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Raichu+skin.pmuskn.zip?index=3&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(9) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Umbreon+skin.pmuskn.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(10) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Vulpix+Theme.rar?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(11) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Seika+with+Music.zip?index=2&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(12) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/7gvJpZb2/Minun+_+Plusle.pmuskn.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(13) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/BoneBrothersTheme.zip?index=11&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(14) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/79YF6sb2/PMU+Chandelure+Family.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(15) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/8mdv4sb2/Chinchou+Skin.zip?index=6&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(16) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/PMU+Eeveelution+skin.zip?index=2&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(17) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/FennekinSkin.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(18) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/PMU+gardevoir+skin.zip?index=3&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(19) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5P6s7sb2/PMU+ho-oh.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(20) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/Jirachi+Skin.zip?index=10&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(21) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/Pikachu+%2B+Family+Theme+v1+by+Whitewing.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(22) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/8mdv4sb2/Salamence+Skin.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(23) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/8mdv4sb2/Snivy+Skin.zip?index=0&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(24) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/Snivy+%2B+Family+Theme+v1+by+Whitewing.zip?index=9&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(25) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/8mdv4sb2/Space+%26+Time.zip?index=5&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(26) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/PMU+Tyranitar+Fam.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(27) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/5rED3sb2/Zangtyph+skin.zip?index=7&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(28) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/8mdv4sb2/Tyranitar+Skin.zip?index=4&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-            else if (listBox1.GetSelected(29) == true)
-            {
-                skinUrl = "http://b2.ge.tt/gett/2PUo9sb2/Hatsune%2BMiku%2BTheme.zip?index=1&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=";
-
-            }
-
-
-
-            else
+            if (listBox1.SelectedIndex == -1)
             {
                 MessageBox.Show("Select a skin", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 skinSelected = false;
@@ -547,9 +310,9 @@ namespace PMUSkinDatabase
 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
-                Uri uri = new Uri(skinUrl);
+                Uri uri = new Uri(skinUrl[listBox1.SelectedIndex]);
                 skinFilename = Path.GetFileName(uri.LocalPath);
-                client.DownloadFileAsync(new Uri(skinUrl), Path.Combine(tempFolder, "tempskin.zip"));
+                client.DownloadFileAsync(new Uri(skinUrl[listBox1.SelectedIndex]), Path.Combine(tempFolder, "tempskin.zip"));
             }
         }
 
@@ -569,6 +332,7 @@ namespace PMUSkinDatabase
             progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
         }
 
+        private string[] folderName;
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
@@ -593,15 +357,21 @@ namespace PMUSkinDatabase
 
                     if (listBox1.GetSelected(7) == true)
                     {
-                        Directory.Delete(Path.Combine(skinDirectory, "__MACOSX"), true);
+                        if (Directory.Exists(Path.Combine(skinDirectory, "__MACOSX")))
+                        {
+                            Directory.Delete(Path.Combine(skinDirectory, "__MACOSX"), true);
+                        }
                     }
 
                     
 
                     if (listBox1.GetSelected(7) == true)
                     {
-                        Directory.Delete(Path.Combine(skinDirectory, folderName[1].Remove(0, Path.Combine(tempFolder, "extracted\\").Length)), true);
-                        Directory.Delete(Path.Combine(tempFolder, "__MACOSX"), true);
+                        if (Directory.Exists(Path.Combine(tempFolder, "__MACOSX")))
+                        {
+                            Directory.Delete(Path.Combine(tempFolder, "__MACOSX"), true);
+                        }
+                        Directory.Delete(Path.Combine(skinDirectory, folderName[0].Remove(0, Path.Combine(tempFolder, "extracted\\").Length)), true);
                     }
 
                     else
@@ -626,6 +396,13 @@ namespace PMUSkinDatabase
             XmlNode selectedSkin = generalNodes[0].ChildNodes[15];
             if (!(selectedSkin == null))
             {
+
+                //Used to check the skin name if debug is enabled.
+                if (isDebugEnabled)
+                {
+                    MessageBox.Show(folderName[0]);
+                }
+
                 if (skinReplaced == false)
                 {
                     MessageBox.Show("Skin has been applied! Once you open PMU, the skin will be installed!",
@@ -642,9 +419,13 @@ namespace PMUSkinDatabase
 
                 if (listBox1.GetSelected(7) == true)
                 {
-                    Directory.Delete(Path.Combine(skinDirectory, "__MACOSX"), true);
+                    if (Directory.Exists(Path.Combine(skinDirectory, "__MACOSX")))
+                    {
+                        Directory.Delete(Path.Combine(skinDirectory, "__MACOSX"), true);
+                    }
                     selectedSkin.InnerText = folderName[1].Remove(0, Path.Combine(tempFolder, "extracted\\").Length);
                 }
+
             }
             settingsPMU.Save(Path.Combine(skinDirectory.Remove(skinDirectory.Length - 6), "settings.xml"));
 
@@ -653,6 +434,7 @@ namespace PMUSkinDatabase
 
         }
 
+        //Runs debug code (When needed)
         private void button2_Click(object sender, EventArgs e)
         {
             
@@ -663,6 +445,7 @@ namespace PMUSkinDatabase
             
         }
 
+        //Run PMU button
         private void button3_Click(object sender, EventArgs e)
         {
             

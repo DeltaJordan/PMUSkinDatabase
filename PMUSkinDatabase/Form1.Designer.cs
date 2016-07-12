@@ -72,7 +72,32 @@
             "Tyranitar Family Skin by SieylahXmaple",
             "Typhlosion & Zangoose by charika",
             "Tyranitar Skin by ISoulMatter",
-            "Haktsune Miku by RedTheMudkip"});
+            "Haktsune Miku by RedTheMudkip",
+            "Plated Beasts by Redstars78",
+            "Yveltal Skin by Redstars78",
+            "Xerneas Skin by Redstars78",
+            "Whimsicott Skin by Tyson123",
+            "Torterra Skin by hayarotle",
+            "Shaymin Skin by Redstars78",
+            "Seviper Skin by princer13",
+            "Reshiram Skin by PachirisuBESTPOKE",
+            "PMD Skin by Whitewingz",
+            "Pikachu Skin by shinypikachu",
+            "Pachirisu Skin by Pipply",
+            "Luxray Skin by Agunimon",
+            "Lugia Skin by calmchaos",
+            "Lucario Skin by Tyson123",
+            "Lady Raincorn Skin by Rawly08",
+            "Jarachi Skin by calmchaos",
+            "Glorious Grass Skin by Agunimon",
+            "Furor of the Fishes Skin by Agunimon",
+            "Empoleon Skin by Tyson123",
+            "Emolga Skin by calmchaos",
+            "Eeveeloutions Skin by Redstars78",
+            "Drahsid\'s Theme by Drahsid",
+            "Charmander Theme by Drahsid",
+            "Bulbasaur Skin by Tyson123",
+            "Sheepy Skin by Pipply"});
             this.listBox1.Location = new System.Drawing.Point(112, 58);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(211, 264);
