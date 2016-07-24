@@ -97,7 +97,8 @@
             "Drahsid\'s Theme by Drahsid",
             "Charmander Theme by Drahsid",
             "Bulbasaur Skin by Tyson123",
-            "Sheepy Skin by Pipply"});
+            "Sheepy Skin by Pipply",
+            "Serperior & Samurott Skin by Asch"});
             this.listBox1.Location = new System.Drawing.Point(112, 58);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(211, 264);

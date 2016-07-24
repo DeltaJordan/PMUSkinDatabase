@@ -183,7 +183,9 @@ namespace PMUSkinDatabase
 
             "http://b2.ge.tt/gett/8CDIuLc2/Bulbasaur.zip?index=2&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
 
-            "http://b2.ge.tt/gett/8CDIuLc2/Sheepy+Skin.pmuskn.zip?index=24&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download="
+            "http://b2.ge.tt/gett/8CDIuLc2/Sheepy+Skin.pmuskn.zip?index=24&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download=",
+
+            "http://b2.ge.tt/gett/8CDIuLc2/Serperior+%26+Samurott.zip?index=26&user=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&referrer=user-ZFZnqJt9p3WLQnX48HsNjnteglAWu85w6hwH2-&download="
 
         };
         private string skinDirectory = "\\Program Files\\Pokemon Mystery Universe\\Client\\Client\\Skins";
